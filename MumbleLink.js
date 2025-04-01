@@ -7,6 +7,15 @@ const Files = Java.type("java.nio.file.Files");
 const Paths = Java.type("java.nio.file.Paths");
 
 const workingDir = new File("").getAbsolutePath();
+const mumbleFolderPath = new File(workingDir + "\\LiquidBounce\\Mumble");
+
+if (!mumbleFolderPath.exists()) {
+    try {
+        mumbleFolderPath.mkdirs();
+    } catch (error) {
+        Client.displayChatMessage("§c§lERROR: §rFailed to create Mumble folder - " + error.message);
+    }
+}
 
 function setupDependencies() {
     const dependencies = [
@@ -82,7 +91,7 @@ script.registerModule({
         const pitch = Float.valueOf(mc.player.pitch.toString());
 
         const cameraPosition = [x, y, z];
-        const cameraOrientation = [sinYaw, cosYaw, pitch]; // TODO: Fix camera rotation errors?
+        const cameraOrientation = [sinYaw, cosYaw, pitch];
         const cameraTopPoint = [0, 1, 0];
 
         mumbleLink.setUiVersion(2);
@@ -102,6 +111,7 @@ script.registerModule({
         if (mumbleLink != null) {
             try {
                 mumbleLink.close();
+                Client.displayChatMessage("§aMumble unlinked successfully!");
             } catch (error) {
                 Client.displayChatMessage("§c§lERROR: §rFailed to unlink Mumble - " + error.message);
             } finally {
