@@ -96,7 +96,7 @@ script.registerModule({
 
         mumbleLink.setUiVersion(2);
         mumbleLink.incrementUiTick();
-        mumbleLink.setName("LiquidBounce");
+        mumbleLink.setName("Minecraft");
         mumbleLink.setContext("Context");
         mumbleLink.setIdentity(mc.player.nameForScoreboard);
         mumbleLink.setAvatarPosition(cameraPosition);
