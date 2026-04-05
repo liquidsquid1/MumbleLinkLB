@@ -82,13 +82,13 @@ script.registerModule({
     mod.on("playerTick", () => {
         if (mumbleLink == null) return;
 
-        const x = Float.valueOf((mc.player.x).toString());
-        const y = Float.valueOf((mc.player.y + mc.player.height).toString());
-        const z = Float.valueOf((mc.player.z).toString());
-        const yaw = Float.valueOf((mc.player.yaw).toString());
+        const x = Float.valueOf((mc.player.position().x).toString());
+        const y = Float.valueOf((mc.player.position().y + mc.player.eyeHeight).toString());
+        const z = Float.valueOf((mc.player.position().z).toString());
+        const yaw = Float.valueOf((mc.player.yRot).toString());
         const sinYaw = Float.valueOf(Math.sin(yaw).toString());
         const cosYaw = Float.valueOf(Math.cos(yaw).toString());
-        const pitch = Float.valueOf(mc.player.pitch.toString());
+        const pitch = Float.valueOf(mc.player.xRot.toString());
 
         const cameraPosition = [x, y, z];
         const cameraOrientation = [sinYaw, cosYaw, pitch];
@@ -98,7 +98,7 @@ script.registerModule({
         mumbleLink.incrementUiTick();
         mumbleLink.setName("Minecraft");
         mumbleLink.setContext("Context");
-        mumbleLink.setIdentity(mc.player.nameForScoreboard);
+        mumbleLink.setIdentity(mc.player.scoreboardName);
         mumbleLink.setAvatarPosition(cameraPosition);
         mumbleLink.setCameraPosition(cameraPosition);
         mumbleLink.setCameraTop(cameraTopPoint);
